@@ -1,9 +1,10 @@
 import Image from "next/image";
+import Link from "next/link"; // <-- ΠΡΟΣΘΗΚΗ: Χρειαζόμαστε αυτό για τα links
 import Navbar from "../components/Navbar";
 import Stats from "../components/Stats";
 import About from "../components/About";
 import Classes from "../components/Classes";
-import Program from "../components/Program"; // <-- ΝΕΟ IMPORT
+import Program from "../components/Program";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import { MoveRight } from "lucide-react";
@@ -70,14 +71,22 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.8 }}
               className="flex items-center gap-4"
             >
-              <button className="group bg-white text-primary px-8 py-4 rounded-full font-medium text-base hover:bg-gray-100 transition-colors flex items-center gap-2">
+              {/* Κουμπί 1: Πηγαίνει στην Επικοινωνία (Φόρμα) */}
+              <Link 
+                href="#επικοινωνία"
+                className="group bg-white text-primary px-8 py-4 rounded-full font-medium text-base hover:bg-gray-100 transition-colors flex items-center gap-2"
+              >
                 Ξεκινήστε τώρα
                 <MoveRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </button>
+              </Link>
               
-              <button className="px-8 py-4 rounded-full font-medium text-white border border-white/30 hover:bg-white/10 transition-colors backdrop-blur-sm">
+              {/* Κουμπί 2: Πηγαίνει στα Τμήματα */}
+              <Link 
+                href="#τμήματα"
+                className="px-8 py-4 rounded-full font-medium text-white border border-white/30 hover:bg-white/10 transition-colors backdrop-blur-sm"
+              >
                 Τα τμήματα
-              </button>
+              </Link>
             </motion.div>
           </div>
         </div>

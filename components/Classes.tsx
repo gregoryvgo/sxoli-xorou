@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link"; 
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
@@ -9,22 +10,25 @@ const classes = [
     id: 1,
     title: "Κλασικό Μπαλέτο",
     description: "Η βάση όλων των χορών. Μέθοδος RAD για όλες τις ηλικίες.",
-    image: "/images/class-ballet.webp", // Θα χρειαστείς αυτή την εικόνα
+    image: "/images/class-ballet.webp",
     level: "All Levels",
+    link: "/classes/ballet", 
   },
   {
     id: 2,
     title: "Σύγχρονος Χορός",
     description: "Ελευθερία έκφρασης, ροή και ενδυνάμωση μέσω της κίνησης.",
-    image: "/images/class-contemporary.webp", // Θα χρειαστείς αυτή την εικόνα
+    image: "/images/class-contemporary.webp",
     level: "Intermediate / Advanced",
+    link: "/classes/contemporary", 
   },
   {
     id: 3,
     title: "Παραδοσιακοί",
     description: "Δυναμισμός, ρυθμός και τεχνική σε ένα εκρηκτικό μάθημα.",
-    image: "/images/class-traditional.webp", // Θα χρειαστείς αυτή την εικόνα
+    image: "/images/class-traditional.webp",
     level: "Teens & Adults",
+    link: "/classes/traditional", // <-- ΕΔΩ ΕΓΙΝΕ Η ΑΛΛΑΓΗ (Πλέον λειτουργεί)
   },
 ];
 
@@ -70,37 +74,42 @@ export default function Classes() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative h-[500px] w-full overflow-hidden cursor-pointer"
+              className="group relative h-[500px] w-full overflow-hidden"
             >
-              {/* Background Image with Zoom Effect */}
-              <div className="absolute inset-0 w-full h-full transition-transform duration-700 ease-out group-hover:scale-110">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  className="object-cover"
-                />
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 group-hover:opacity-90" />
-              </div>
-
-              {/* Content Overlay */}
-              <div className="absolute inset-0 p-8 flex flex-col justify-end text-white">
-                <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <span className="text-xs tracking-widest uppercase text-white/70 mb-2 block">
-                    {item.level}
-                  </span>
-                  <div className="flex justify-between items-center">
-                    <h3 className="font-serif text-3xl font-medium mb-2">
-                      {item.title}
-                    </h3>
-                    <ArrowUpRight className="w-6 h-6 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-white" />
-                  </div>
-                  <p className="text-white/80 font-light text-sm leading-relaxed max-w-[90%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                    {item.description}
-                  </p>
+              {/* WRAP THE WHOLE CARD IN LINK */}
+              <Link href={item.link} className="block w-full h-full">
+                
+                {/* Background Image with Zoom Effect */}
+                <div className="absolute inset-0 w-full h-full transition-transform duration-700 ease-out group-hover:scale-110">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover"
+                  />
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 group-hover:opacity-90" />
                 </div>
-              </div>
+
+                {/* Content Overlay */}
+                <div className="absolute inset-0 p-8 flex flex-col justify-end text-white pointer-events-none">
+                  <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <span className="text-xs tracking-widest uppercase text-white/70 mb-2 block">
+                      {item.level}
+                    </span>
+                    <div className="flex justify-between items-center">
+                      <h3 className="font-serif text-3xl font-medium mb-2">
+                        {item.title}
+                      </h3>
+                      <ArrowUpRight className="w-6 h-6 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-white" />
+                    </div>
+                    <p className="text-white/80 font-light text-sm leading-relaxed max-w-[90%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+
+              </Link>
             </motion.div>
           ))}
         </div>

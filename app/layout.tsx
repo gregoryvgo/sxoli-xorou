@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
-import "./globals.css"; // Αυτό είναι απαραίτητο για να δουλέψει το Tailwind
+import "./globals.css";
+import CookieConsent from "../components/CookieConsent"; // <-- 1. ΠΡΟΣΘΗΚΗ IMPORT
 
-// 1. Ρύθμιση της Inter (για το κυρίως κείμενο)
+// 1. Ρύθμιση της Inter
 const inter = Inter({
   subsets: ["latin", "greek"],
-  variable: "--font-inter", // Αυτό το όνομα πρέπει να ταιριάζει με το globals.css
+  variable: "--font-inter",
   display: "swap",
 });
 
-// 2. Ρύθμιση της Playfair Display (για τους τίτλους - Luxury ύφος)
+// 2. Ρύθμιση της Playfair Display
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
@@ -28,11 +29,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="el" className="scroll-smooth">
-      {/* Εδώ "κουμπώνουμε" τις γραμματοσειρές στο body.
-        Το className antialiased κάνει τα fonts να φαίνονται πιο καθαρά/λεπτά.
-      */}
       <body className={`${inter.variable} ${playfair.variable} antialiased bg-white text-gray-900`}>
+        
+        {/* Το κυρίως περιεχόμενο της σελίδας */}
         {children}
+
+        {/* 2. ΠΡΟΣΘΗΚΗ: Το Cookie Banner στο τέλος */}
+        <CookieConsent />
+        
       </body>
     </html>
   );
